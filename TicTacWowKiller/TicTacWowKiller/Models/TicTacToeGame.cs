@@ -2,7 +2,15 @@ namespace TicTacWowKiller.Models;
 
 public class TicTacToeGame
 {
-    public char[,] Board { get; private set; } //3x3 board
+    public char[,] Board { get; private set; } // 3x3 board
     public char CurrentPlayer { get; private set; } // 'X' or 'O'
-    public bool isGameOver { get; private set; } //If game has ended
+    public bool isGameOver { get; private set; } // If game has ended
+
+    public TicTacToeGame()
+    {
+        Board = new char[3, 3]; // Creates the game
+        CurrentPlayer = 'X'; // 'X' always starts first
+        isGameOver = false;
+
+    }
 }
