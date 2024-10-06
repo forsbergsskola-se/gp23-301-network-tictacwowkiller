@@ -1,9 +1,7 @@
 using TicTacWowKiller.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace TicTacWowKiller.Controllers;
-
-public class TicTacController
+namespace TicTacWowKiller.Controllers
 {
     [Route("api/[controller]")] //Set up for route like /api/tictactoe
     [ApiController]
@@ -45,7 +43,7 @@ public class TicTacController
         public IActionResult RestartGame()
         {
             game = new TicTacToeGame(); // Creates a new game instance
-            return Ok("Game Restarted.");
+            return Ok("Game restarted.");
         }
     }
 }
