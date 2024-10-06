@@ -15,19 +15,20 @@ namespace TicTacWowKiller.Controllers
         [HttpGet("board")]
         public IActionResult GetBoard()
         {
-            var boardList = new List<List<char>>();
+            var boardString = new System.Text.StringBuilder();
+    
             for (int i = 0; i < game.Board.GetLength(0); i++)
             {
-                var row = new List<char>();
                 for (int j = 0; j < game.Board.GetLength(1); j++)
                 {
-                    row.Add(game.Board[i, j]);
+                    boardString.Append(game.Board[i, j] + " ");
                 }
-                boardList.Add(row);
+                boardString.AppendLine(); // Move to the next line after each row
             }
 
-            return Ok(boardList);
+            return Ok(boardString.ToString());  // Return the board as a string
         }
+
 
         [HttpPost("move")]
         public IActionResult MakeMove([FromQuery] int row, [FromQuery] int col)
@@ -38,11 +39,11 @@ namespace TicTacWowKiller.Controllers
                 return BadRequest("Invalid Move! Row and column must be between 0 and 2.");
             }
 
-            // Try to make move on the board
+            // Try to make a move on the board
             bool success = game.MakeMove(row, col);
             if (!success)
             {
-                return BadRequest("Invalid Move or game is over");
+                return BadRequest("Invalid Move or the game is over.");
             }
 
             // Convert the 2D char array to a list of lists for JSON serialization
@@ -57,10 +58,14 @@ namespace TicTacWowKiller.Controllers
                 boardList.Add(rowList);
             }
 
-            // Return the updated board and game status using the converted board
-            return Ok(new { Board = boardList, CurrentPlayer = game.CurrentPlayer, IsGameOver = game.isGameOver });
+            // Return the board, current player, and game status
+            return Ok(new
+            {
+                Board = boardList,  // Return the list of lists format
+                CurrentPlayer = game.CurrentPlayer,
+                IsGameOver = game.isGameOver
+            });
         }
-
 
         // API to restart the game (for rematch)
         [HttpPost("restart")]
