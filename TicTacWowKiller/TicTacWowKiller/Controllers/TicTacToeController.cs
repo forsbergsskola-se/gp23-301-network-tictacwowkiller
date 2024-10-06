@@ -14,7 +14,18 @@ namespace TicTacWowKiller.Controllers
         [HttpGet("board")]
         public IActionResult GetBoard()
         {
-            return Ok(game.Board); // Returns 3X3 board as a JSON response
+            var boardList = new List<List<char>>();
+            for (int i = 0; i < game.Board.GetLength(0); i++)
+            {
+                var row = new List<char>();
+                for (int j = 0; j < game.Board.GetLength(1); j++)
+                {
+                    row.Add(game.Board[i, j]);
+                }
+                boardList.Add(row);
+            }
+
+            return Ok(boardList);
         }
 
         //Api to make move on board

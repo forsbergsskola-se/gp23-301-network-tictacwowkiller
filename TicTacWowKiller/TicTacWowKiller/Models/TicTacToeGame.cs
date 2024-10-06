@@ -9,9 +9,10 @@ public class TicTacToeGame
     public TicTacToeGame()
     {
         Board = new char[3, 3]; // Creates the game
+        InitializeBoard();
         CurrentPlayer = 'X'; // 'X' always starts first
         isGameOver = false;
-        InitializeBoard();
+        
     }
 
     //Initialize the board with '-' to represent empty cells
