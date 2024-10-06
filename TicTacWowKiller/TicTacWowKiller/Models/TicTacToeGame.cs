@@ -36,7 +36,7 @@ public class TicTacToeGame
         Board[row, col] = CurrentPlayer;
 
         //Checks if Current player has won the game 
-        if (CheckWin)
+        if (CheckWin())
         {
             isGameOver = true;
         }
