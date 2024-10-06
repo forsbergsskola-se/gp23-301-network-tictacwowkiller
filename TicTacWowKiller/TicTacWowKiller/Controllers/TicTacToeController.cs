@@ -1,5 +1,6 @@
 using TicTacWowKiller.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace TicTacWowKiller.Controllers
 {
@@ -28,7 +29,6 @@ namespace TicTacWowKiller.Controllers
             return Ok(boardList);
         }
 
-        //Api to make move on board
         [HttpPost("move")]
         public IActionResult MakeMove([FromQuery] int row, [FromQuery] int col)
         {
@@ -38,16 +38,29 @@ namespace TicTacWowKiller.Controllers
                 return BadRequest("Invalid Move! Row and column must be between 0 and 2.");
             }
 
-            //Try to make move on the board
+            // Try to make move on the board
             bool success = game.MakeMove(row, col);
             if (!success)
             {
                 return BadRequest("Invalid Move or game is over");
             }
 
-            //Return the updated board and game status
-            return Ok(new { Board = game.Board, CurrentPlayer = game.CurrentPlayer, IsGameOver = game.isGameOver });
+            // Convert the 2D char array to a list of lists for JSON serialization
+            var boardList = new List<List<char>>();
+            for (int i = 0; i < game.Board.GetLength(0); i++)
+            {
+                var rowList = new List<char>();
+                for (int j = 0; j < game.Board.GetLength(1); j++)
+                {
+                    rowList.Add(game.Board[i, j]);
+                }
+                boardList.Add(rowList);
+            }
+
+            // Return the updated board and game status using the converted board
+            return Ok(new { Board = boardList, CurrentPlayer = game.CurrentPlayer, IsGameOver = game.isGameOver });
         }
+
 
         // API to restart the game (for rematch)
         [HttpPost("restart")]
