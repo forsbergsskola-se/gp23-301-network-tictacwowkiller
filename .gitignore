@@ -1,0 +1,66 @@
+# Ignore Visual Studio temporary files, build results, and
+# user-specific files
+.vscode/
+.idea/
+*.user
+*.userosscache
+*.sln.docstates
+*.suo
+*.user
+*.sln.cache
+
+# Rider-specific files
+.idea/
+*.iml
+
+# Ignore build results
+bin/
+obj/
+
+# Ignore NuGet Packages
+packages/
+*.nupkg
+# Uncomment if you have NuGet Package Restore enabled
+#*.nuget
+# Packages folder can be ignored because of Package Restore
+**/packages/*
+!**/packages/build/
+!**/packages/repositories.config
+
+# Ignore any app secrets (when using `dotnet user-secrets` in development)
+secrets.json
+
+# Ignore sensitive files like .env or config secrets
+.env
+
+# Ignore app settings for development environments
+appsettings.Development.json
+
+# Ignore build directories
+/Build/
+/build/
+/out/
+
+# Ignore the publish output
+/publish/
+/publish/
+
+# Ignore node_modules (if using Node.js for front-end dependencies)
+/node_modules/
+/npm-debug.log
+
+# Ignore JetBrains Rider logs and settings
+.idea/
+
+# Ignore ASP.NET Core server logs
+logs/
+
+# Ignore global.json, unless it is to specify the SDK version
+global.json
+
+# Ignore .NET history and cache
+.nuget/
+.dotnet/
+.cache/
+.vscode/
+
